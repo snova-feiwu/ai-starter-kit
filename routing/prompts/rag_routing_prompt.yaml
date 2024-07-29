@@ -1,0 +1,33 @@
+_type: prompt
+input_types: {}
+input_variables:
+- question
+name: null
+output_parser: null
+partial_variables: {}
+template: |
+    """
+    <s>[INST] You are an expert at routing a user question to a vectorstore or simple answering based on your own knowledge (llm).  
+    The vectorstore contains documents related to a list of topics.
+    Use the vectorstore for questions on these topics. Otherwise, use llm.
+    The routing result should be either `vectorstore`or `llm`.
+    The answer must be in the json format: 
+    {{
+        datasource: routing result
+    }}
+
+    Example:
+    User query: What is sambatune?
+    Answer:
+    {{
+        datasource: vectorstore
+    }}
+
+    Here are the topics in the vectorstore:
+    {keywords}
+    
+    User query: {query} [/INST]
+    Answer:</s>
+    """
+template_format: f-string
+validate_template: false
